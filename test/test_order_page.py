@@ -1,0 +1,24 @@
+import pytest
+
+from data import ORDER_DATA_1, ORDER_DATA_2
+from locators.main_page_locators import MainPageLocators
+from locators.order_page_locators import OrderPageLocators
+from pages.order_page import OrderPage
+from urls import URL_MAIN_PAGE
+
+
+class TestOrderPage:
+    @pytest.mark.parametrize(
+      'locator, order_data',
+       [
+           (MainPageLocators.ORDER_BUTTON_UP, ORDER_DATA_1),
+           (MainPageLocators.ORDER_BUTTON_DOWN, ORDER_DATA_2)
+       ],
+    )
+    def test_create_order(self, driver, locator, order_data):
+        order_page = OrderPage(driver)
+        order_page.go_to_url(URL_MAIN_PAGE)
+        order_page.scroll_to_element(locator)
+        order_page.click_to_element(locator)
+        order_page.set_order(order_data)
+        assert 'Заказ оформлен' in order_page.get_text_from_element(OrderPageLocators.ORDER_SUCCESS)
