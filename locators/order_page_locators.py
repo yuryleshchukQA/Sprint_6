@@ -2,8 +2,6 @@ from selenium.webdriver.common.by import By
 
 
 class OrderPageLocators:
-    #FIRST_PAGE = By.XPATH, '//*[@id="accordion__heading-{}"]'
-    #SECOND_PAGE = By.XPATH, '//*[@id="accordion__panel-{}"]'
     NAME_LOCATOR = By.XPATH, "//input[@placeholder='* Имя']"
     LAST_NAME_LOCATOR = By.XPATH, "//input[@placeholder='* Фамилия']"
     ADDRESS_LOCATOR = By.XPATH, "//input[@placeholder='* Адрес: куда привезти заказ']"

@@ -1,16 +1,7 @@
 import allure
-from selenium.webdriver.support.ui import WebDriverWait
 
 from locators.header_locators import HeaderLocators
 from pages.base_page import BasePage
-
-
-def second_tab_opened(driver):
-    return len(driver.window_handles) >= 2
-
-
-def dzen_url_in_address_bar(driver):
-    return 'dzen.ru' in driver.current_url
 
 
 class HeaderPage(BasePage):
@@ -20,14 +11,12 @@ class HeaderPage(BasePage):
 
     @allure.step('Дождаться второй вкладки и переключиться на неё')
     def switch_to_second_tab(self):
-        wait = WebDriverWait(self.driver, 15)
-        wait.until(second_tab_opened)
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.wait_second_tab()
+        self.switch_to_window_by_index(1)
 
     @allure.step('Дождаться, пока в адресной строке появится dzen.ru')
     def wait_until_dzen_url(self):
-        wait = WebDriverWait(self.driver, 25)
-        wait.until(dzen_url_in_address_bar)
+        self.wait_url_contains('dzen.ru')
 
     @allure.step('Клик по логотипу Самоката')
     def click_scooter_logo(self):

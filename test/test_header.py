@@ -14,7 +14,7 @@ class TestHeader:
         page.click_yandex_logo()
         page.switch_to_second_tab()
         page.wait_until_dzen_url()
-        url = page.driver.current_url
+        url = page.get_current_url()
         assert 'dzen.ru' in url
         assert 'yredirect' in url
 
@@ -23,4 +23,4 @@ class TestHeader:
         page = HeaderPage(driver)
         page.go_to_url(URL_ORDER_PAGE)
         page.click_scooter_logo()
-        assert page.driver.current_url == URL_MAIN_PAGE
+        assert page.get_current_url() == URL_MAIN_PAGE
